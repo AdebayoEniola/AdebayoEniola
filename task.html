@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOM Manipulation Example</title>
+<style>
+  /* CSS styles */
+  .item {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+  }
+  .new-item {
+    background-color: #ffe4e1;
+  }
+</style>
+</head>
+<body>
+
+<h2>Shopping List</h2>
+
+<!-- List of items -->
+<ul id="item-list">
+  <li class="item">Apples</li>
+  <li class="item">Bananas</li>
+  <li class="item">Oranges</li>
+</ul>
+
+<!-- Form to add a new item -->
+<form id="add-item-form">
+  <input type="text" id="new-item-input" placeholder="Enter new item">
+  <button type="submit">Add Item</button>
+</form>
+
+<script>
+  // JavaScript code for DOM manipulation
+  
+  // Function to add a new item
+  function addItem(event) {
+    event.preventDefault(); // Prevent form submission
+    const newItemInput = document.getElementById('new-item-input');
+    const newItemText = newItemInput.value.trim(); // Get input value and remove leading/trailing spaces
+
+    if (newItemText) { // Check if input value is not empty
+      const itemList = document.getElementById('item-list');
+      const newItem = document.createElement('li');
+      newItem.textContent = newItemText;
+      newItem.classList.add('item', 'new-item');
+      itemList.appendChild(newItem);
+      newItemInput.value = ''; // Clear input field after adding item
+    }
+  }
+
+  // Event listener to call addItem function when form is submitted
+  document.getElementById('add-item-form').addEventListener('submit', addItem);
+  
+  // Function to change the color of an existing item
+  function changeColor() {
+    const existingItems = document.querySelectorAll('.item');
+    existingItems.forEach(item => {
+      item.classList.toggle('new-item');
+    });
+  }
+
+  // Event listener to call changeColor function when any item is clicked
+  const itemList = document.getElementById('item-list');
+  itemList.addEventListener('click', changeColor);
+</script>
+
+</body>
+</html>
